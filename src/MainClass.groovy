@@ -1,19 +1,13 @@
 class MainClass {
     static void main(String[] args) {
-        def fc1 = new FirstClass()
-        //new FirstClass(name: 'timmy', age: 19, address: 'Bern', cash: 120)
-        //println fc1.name + "\n" + fc1.age + "\n" + fc1.address + "\n" + fc1.cash
-
-        def binding = new Binding()
-        binding.setProperty(fc1.name, "Timmy")
-        binding.setProperty(fc1.age as String, 19)
-        binding.setProperty(fc1.address, "Bern")
-        binding.setProperty(fc1.cash as String, 120)
-
+        def fc1 = new FirstClass(name: 'Timmy', age: 19, address: 'Bern', cash: 120)
         println fc1.name + "\n" + fc1.age + "\n" + fc1.address + "\n" + fc1.cash
+        println(String instanceof Integer)
+        println(Integer instanceof String)
 
+        def woof = { String a -> println("woof") }
+        woof("woof")
     }
-
 }
 
 // В классе FirstClass создайте явный конструктор и попытайтесь в файле MainClass создать экземпляр класса FirstClass.
