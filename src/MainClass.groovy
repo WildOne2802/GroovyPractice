@@ -1,6 +1,3 @@
-import groovy.lang.Binding
-import sun.misc.Unsafe
-
 class MainClass {
     static void main(String[] args) {
         def fc1 = new FirstClass(name: 'Timmy', age: 19, address: 'Bern', cash: 120)
