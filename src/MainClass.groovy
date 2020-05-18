@@ -1,13 +1,29 @@
-import javax.naming.Binding
+import groovy.lang.Binding
+import sun.misc.Unsafe
 
 class MainClass {
     static void main(String[] args) {
         def fc1 = new FirstClass(name: 'Timmy', age: 19, address: 'Bern', cash: 120)
 
-        println fc1.name + "\n" + fc1.age + "\n" + fc1.address + "\n" + fc1.cash
+        println fc1 // Timmy 19 Bern 120.0
+
+        println(intFunc())
+
+        def binding = new Binding()
+        binding.setVariable("name", 'AlterEgoTimmy')
+        binding.setVariable("age", 91)
+        binding.setVariable("address", 'Geneva')
+        binding.setVariable("cash", 150)
+        def fc2 = new FirstClass(binding)
+
+        println fc2 // AlterEgoTimmy 91 Geneva 150.0
+        println fc2.getName() // AlterEgoTimmy
+
 
         println("String instanceof Integer: " + (String instanceof Integer))    // false
         println("Integer instanceof String: " + (Integer instanceof String))    // false
+
+        println FirstClass.doSmth() // if static it's ok
 
 //        println(firstFunc(null))    // doesn't work
 //        println(secondFunc(null))
@@ -49,9 +65,31 @@ class MainClass {
         def res = date1 - date2
         println(res)    // 28
 
+//        date1.minus()
+////        date1.plus(new Date((2629743830L + 86400000L)))
+//        println(date1)
+
+        println(closureMinus(2, 2))
+        println(closureMinus(2, 2))
+        println(closureBoth(4.0, 2.0, 1))
 
 
+    }
 
+    static def closureDivide = {
+        a, b -> a / b
+    }
+
+    static def closureMinus = {
+        a, b -> a - b
+    }
+
+    static def closureBoth = {
+        a, b, c -> MainClass.closureMinus(MainClass.closureDivide(a, b), c)
+    }
+
+    static Integer intFunc() {
+        12
     }
 
     int firstFunc(Integer k) {
