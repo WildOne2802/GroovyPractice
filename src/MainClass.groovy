@@ -50,11 +50,11 @@ class MainClass {
         println(x.getClass().getName()) // String
 
         def x1 = 'f'
-        println(x.getClass().getName()) // String
+        println(x1.getClass().getName()) // String
         x1 = 'First'
-        println(x.getClass().getName()) // String
+        println(x1.getClass().getName()) // String
         x1 = 10
-        println(x.getClass().getName()) // String
+        println(x1.getClass().getName()) // Integer
 
         Date date1 = new Date(115, 1, 28)
         println(date1)  // Sat Feb 28 00:00:00 MSK 2015
@@ -82,9 +82,9 @@ class MainClass {
 ////        date1.plus(new Date((2629743830L + 86400000L)))
 //        println(date1)
 
-        println(closureMinus(2, 2))
-        println(closureMinus(2, 2))
-        println(closureBoth(4.0, 2.0, 1))
+        println(closureMinus(2, 2)) // 0
+        println(closureDivide(2, 2))    // 1
+        println(closureBoth(4.0, 2.0, 1))   // 1
 
     }
 
