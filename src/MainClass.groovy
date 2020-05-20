@@ -1,3 +1,5 @@
+import static java.util.Calendar.MONTH
+
 class MainClass {
     static void main(String[] args) {
         def fc1 = new FirstClass(name: 'Timmy', age: 19, address: 'Bern', cash: 120)
@@ -59,8 +61,22 @@ class MainClass {
         Date date2 = new Date(115, 0, 31)
         println(date2)  // Sat Jan 31 00:00:00 MSK 2015
 
+        def result = new Date(date1.getTime() - date2.getTime())
+        println(result) // Thu Jan 29 03:00:00 MSK 1970
+
         def res = date1 - date2
         println(res)    // 28
+
+        Date date3 = new Date(115, 1, 28)
+
+        def prevMonth = date3[MONTH] - 1
+        date3.set(month: prevMonth)
+        println(date3)  // Wed Jan 28 00:00:00 MSK 2015
+        def nextMonth = date3[MONTH] + 1
+        date3.set(month: nextMonth)
+        println(date3)  // Sat Feb 28 00:00:00 MSK 2015
+        date3 = date3.next()
+        println(date3)  // Sun Mar 01 00:00:00 MSK 2015
 
 //        date1.minus()
 ////        date1.plus(new Date((2629743830L + 86400000L)))
@@ -69,7 +85,6 @@ class MainClass {
         println(closureMinus(2, 2))
         println(closureMinus(2, 2))
         println(closureBoth(4.0, 2.0, 1))
-
 
     }
 
