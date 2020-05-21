@@ -1,5 +1,3 @@
-import org.apache.tools.ant.types.resources.First
-
 class FirstClass {
     String name
     int age

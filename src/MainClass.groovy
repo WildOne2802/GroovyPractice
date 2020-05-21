@@ -108,7 +108,6 @@ class MainClass {
         return k
     }
 
-
     static Integer secondFunc(Integer k) {
         return k
     }
