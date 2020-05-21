@@ -6,6 +6,12 @@ class FirstClass {
     String address
     double cash
 
+    @Override
+    String toString() {
+        return name + " " + age + " " + address + " " + cash
+
+    }
+
     FirstClass() {}
 
     FirstClass(name, age, address, cash) {
@@ -15,6 +21,7 @@ class FirstClass {
         this.cash = cash
     }
 
+
     FirstClass(Binding binding) {
         name = binding.getProperty("name")
         age = binding.getProperty("age")
@@ -22,12 +29,7 @@ class FirstClass {
         cash = binding.getProperty("cash")
     }
 
-    static doSmth(){
+    static doSmth() {
         return "Doing smth"
-    }
-
-    @Override
-    String toString() {
-        return name + " " + age + " " + address + " " + cash
     }
 }

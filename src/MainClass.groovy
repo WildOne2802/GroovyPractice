@@ -6,33 +6,34 @@ class MainClass {
 
         println fc1 // Timmy 19 Bern 120.0
 
-        println(intFunc())
 
         def binding = new Binding()
         binding.setVariable("name", 'AlterEgoTimmy')
         binding.setVariable("age", 91)
         binding.setVariable("address", 'Geneva')
         binding.setVariable("cash", 150)
-        def fc2 = new FirstClass(binding)
 
+        def fc2 = new FirstClass(binding)
         println fc2 // AlterEgoTimmy 91 Geneva 150.0
         println fc2.getName() // AlterEgoTimmy
 
+        println("String instanceof Integer: " + (String instanceof Integer))    // String instanceof Integer: false
+        println("Integer instanceof String: " + (Integer instanceof String))    // Integer instanceof String: false
 
-        println("String instanceof Integer: " + (String instanceof Integer))    // false
-        println("Integer instanceof String: " + (Integer instanceof String))    // false
+        println FirstClass.doSmth() // if static it's ok: Doing smth
 
-        println FirstClass.doSmth() // if static it's ok
+        println('intFunc: ' + intFunc()) // intFunc: 12
 
-//        println(firstFunc(null))    // doesn't work
-//        println(secondFunc(null))
+//        println('firstFunc: ' + firstFunc(null))    // doesn't work
+        println('secondFunc: ' + secondFunc(null))   // null
 
         BigDecimal a = new BigDecimal(12)
         BigDecimal b = new BigDecimal(12)
 
-        println("a.equals(b): " + a.equals(b)) // true
-        println("a.is(b): " + a.is(b))  // false
-        println("a == b: " + (a == b))  // true
+        println("a.equals(b): " + a.equals(b)) // a.equals(b): true
+        println("a.is(b): " + a.is(b))  // a.is(b): false
+        println("a === b: " + (a === b)) // a === b: false
+        println("a == b: " + (a == b))  // a == b: true
 
         println(a + " add " + b + " = " + a.add(b)) // 12 add 12 = 24
         println(a + " divide " + b + " = " + a.divide(b))   // 12 divide 12 = 1
@@ -43,49 +44,48 @@ class MainClass {
         println(a + " * " + b + " = " + a * b)  // 12 * 12 = 144
 
         def x = 10
-        println(x.getClass().getName()) // Integer
+        println(x.getClass().getName()) // java.lang.Integer
         x = 'f'
-        println(x.getClass().getName()) // String
+        println(x.getClass().getName()) // java.lang.String
         x = 'First'
-        println(x.getClass().getName()) // String
+        println(x.getClass().getName()) // java.lang.String
 
         def x1 = 'f'
-        println(x1.getClass().getName()) // String
+        println(x1.getClass().getName()) // java.lang.String
         x1 = 'First'
-        println(x1.getClass().getName()) // String
+        println(x1.getClass().getName()) // java.lang.String
         x1 = 10
-        println(x1.getClass().getName()) // Integer
+        println(x1.getClass().getName()) // java.lang.Integer
 
         Date date1 = new Date(115, 1, 28)
         println(date1)  // Sat Feb 28 00:00:00 MSK 2015
+
         Date date2 = new Date(115, 0, 31)
         println(date2)  // Sat Jan 31 00:00:00 MSK 2015
 
         def result = new Date(date1.getTime() - date2.getTime())
-        println(result) // Thu Jan 29 03:00:00 MSK 1970
+        println('date1.getTime() - date2.getTime(): ' + result)
+        // date1.getTime() - date2.getTime(): Thu Jan 29 03:00:00 MSK 1970
 
         def res = date1 - date2
-        println(res)    // 28
+        println('date1 - date2: ' + res)    // date1 - date2: 28
 
         Date date3 = new Date(115, 1, 28)
 
         def prevMonth = date3[MONTH] - 1
         date3.set(month: prevMonth)
         println(date3)  // Wed Jan 28 00:00:00 MSK 2015
+
         def nextMonth = date3[MONTH] + 1
         date3.set(month: nextMonth)
         println(date3)  // Sat Feb 28 00:00:00 MSK 2015
+
         date3 = date3.next()
         println(date3)  // Sun Mar 01 00:00:00 MSK 2015
 
-//        date1.minus()
-////        date1.plus(new Date((2629743830L + 86400000L)))
-//        println(date1)
-
-        println(closureMinus(2, 2)) // 0
-        println(closureDivide(2, 2))    // 1
-        println(closureBoth(4.0, 2.0, 1))   // 1
-
+        println('closureDivide: ' + closureDivide(2, 2))    // closureDivide: 1
+        println('closureBoth: ' + closureBoth(4.0, 2.0, 1))   // closureBoth: 1
+        println('closureMinus: ' + closureMinus(2, 2)) // closureMinus: 0
     }
 
     static def closureDivide = {
@@ -104,26 +104,15 @@ class MainClass {
         12
     }
 
-    int firstFunc(Integer k) {
-        return k * 120;
+    static int firstFunc(Integer k) {
+        return k
     }
 
-    Integer secondFunc(Integer k) {
-        return k * 120;
-    }
 
+    static Integer secondFunc(Integer k) {
+        return k
+    }
 }
 
-// В классе FirstClass создайте явный конструктор и попытайтесь в файле MainClass создать экземпляр класса FirstClass.
-// Возможно ли это сделать с поименной передачей параметров в этот конструктор?
-// Нет, не возможно:
-// Exception in thread "main" groovy.lang.GroovyRuntimeException: Could not find matching constructor for: FirstClass(LinkedHashMap)
-//	at groovy.lang.MetaClassImpl.invokeConstructor(MetaClassImpl.java:1807)
-//	at groovy.lang.MetaClassImpl.invokeConstructor(MetaClassImpl.java:1599)
-//	at org.codehaus.groovy.runtime.callsite.MetaClassConstructorSite.callConstructor(MetaClassConstructorSite.java:46)
-//	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:59)
-//	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
-//	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
-//	at MainClass.main(MainClass.groovy:3)
-//
+
 
