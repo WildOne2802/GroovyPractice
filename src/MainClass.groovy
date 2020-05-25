@@ -22,6 +22,12 @@ class MainClass {
 
         println FirstClass.doSmth() // if static it's ok: Doing smth
 
+        ClassToCheckDef check = new ClassToCheckDef(name: 'Timmy', id: 1, cash: 15.0, specialVariable: "hello")
+        println(check)  // Name: Timmy id: 1 Cash: 15.0 specialVariable: hello
+        check.specialVariable = 130.0
+        println(check)  // Name: Timmy id: 1 Cash: 15.0 specialVariable: 130.0
+
+
         println('intFunc: ' + intFunc()) // intFunc: 12
 
 //        println('firstFunc: ' + firstFunc(null))    // doesn't work
